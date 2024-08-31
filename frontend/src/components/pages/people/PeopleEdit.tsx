@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { Person } from '../../../types'
+import type { Person } from '../../../../../server/src/types'
 import { Layout } from '../../Layout'
 
 type Props = {
