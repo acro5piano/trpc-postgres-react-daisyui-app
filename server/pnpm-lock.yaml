@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@trpc/client':
+        specifier: 11.0.0-rc.490
+        version: 11.0.0-rc.490(@trpc/server@11.0.0-rc.490)
+      '@trpc/server':
+        specifier: 11.0.0-rc.490
+        version: 11.0.0-rc.490
       better-sqlite3:
         specifier: ^11.1.2
         version: 11.1.2
@@ -29,6 +35,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@types/better-sqlite3':
         specifier: ^7.6.11
@@ -203,6 +212,14 @@ packages:
 
   '@fastify/merge-json-schemas@0.1.1':
     resolution: {integrity: sha512-fERDVz7topgNjtXsJTTW1JKLy0rhuLRcquYqNR9rF7OcVpCa2OVW49ZPDIhaRRCaUuvVxI+N416xUoF76HNSXA==}
+
+  '@trpc/client@11.0.0-rc.490':
+    resolution: {integrity: sha512-rfAzHF27osuP36JWGzq9TgXMnNc5kk1oAIoMafVHkCu3XlEZH3Ym2BpucHBWp/b5JYrtvzM91jskzvE0yO3mYw==}
+    peerDependencies:
+      '@trpc/server': 11.0.0-rc.490+b6a851870
+
+  '@trpc/server@11.0.0-rc.490':
+    resolution: {integrity: sha512-JkKLvA0QIErqslsgU6uFvpv9xtxe78C59zqUdZFmUI0V9pIAJlxmODV4I9hTDcX8P+B30rP3z+q2+bPozN2MaQ==}
 
   '@types/better-sqlite3@7.6.11':
     resolution: {integrity: sha512-i8KcD3PgGtGBLl3+mMYA8PdKkButvPyARxA7IQAd6qeslht13qxb1zzO8dRCtE7U3IoJS782zDBAeoKiM695kg==}
@@ -687,6 +704,9 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@esbuild/aix-ppc64@0.23.0':
@@ -776,6 +796,12 @@ snapshots:
   '@fastify/merge-json-schemas@0.1.1':
     dependencies:
       fast-deep-equal: 3.1.3
+
+  '@trpc/client@11.0.0-rc.490(@trpc/server@11.0.0-rc.490)':
+    dependencies:
+      '@trpc/server': 11.0.0-rc.490
+
+  '@trpc/server@11.0.0-rc.490': {}
 
   '@types/better-sqlite3@7.6.11':
     dependencies:
@@ -1293,3 +1319,5 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   wrappy@1.0.2: {}
+
+  zod@3.23.8: {}

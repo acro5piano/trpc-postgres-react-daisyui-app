@@ -1,18 +1,17 @@
-import type { Person } from '../../../../../server/src/types'
+import { Link } from 'wouter'
+import { trpc } from '../../../infra/trpc'
 import { Layout } from '../../Layout'
 
-type PeopleProps = {
-  people: Person[]
-}
+export const PeopleList: React.FC = () => {
+  const peopleQuery = trpc.personList.useQuery()
 
-export const PeopleList: React.FC<PeopleProps> = ({ people }) => {
   return (
     <Layout>
       <div className="">
         <div className="flex justify-end">
-          <a href="/people/new" className="da-btn da-btn-primary">
+          <Link href="/people/new" className="da-btn da-btn-primary">
             Create
-          </a>
+          </Link>
         </div>
         <div className="">
           <table className="da-table da-table-bordered">
@@ -25,7 +24,7 @@ export const PeopleList: React.FC<PeopleProps> = ({ people }) => {
               </tr>
             </thead>
             <tbody>
-              {people.map((person) => (
+              {peopleQuery.data?.map((person) => (
                 <tr key={person.id}>
                   <td>
                     <code>{person.id}</code>

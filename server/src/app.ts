@@ -1,16 +1,18 @@
-import Fastify from 'fastify'
-import { peopleRoute } from './routes/peopleRoute'
-import { migrateUp } from './db'
-import fastifyFormbody from '@fastify/formbody'
-import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox'
-import fastifyStatic from '@fastify/static'
+import { createHTTPServer } from '@trpc/server/adapters/standalone'
+import { publicProcedure, router } from './trpc'
+import { db } from './db'
 
-const app = Fastify({ logger: true }).withTypeProvider<TypeBoxTypeProvider>()
-
-app.register(fastifyFormbody)
-app.register(fastifyStatic, { root: __dirname + '/../static' })
-app.register(peopleRoute, { prefix: '/people' })
-
-app.listen({ port: 8000, host: '0.0.0.0' }).then(async () => {
-  await migrateUp()
+const appRouter = router({
+  personList: publicProcedure.query(async () => {
+    return db.selectFrom('person').selectAll().execute()
+  }),
 })
+
+const server = createHTTPServer({
+  router: appRouter,
+})
+server.listen(3000)
+
+// Export type router type signature,
+// NOT the router itself.
+export type AppRouter = typeof appRouter

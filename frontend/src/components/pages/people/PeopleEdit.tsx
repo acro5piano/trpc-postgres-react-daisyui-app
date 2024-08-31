@@ -1,13 +1,7 @@
 import clsx from 'clsx'
-import type { Person } from '../../../../../server/src/types'
 import { Layout } from '../../Layout'
 
-type Props = {
-  person: Person
-  errors?: { [k in keyof Person]?: string }
-}
-
-export const PeopleEdit: React.FC<Props> = ({ person, errors = {} }) => {
+export const PeopleEdit: React.FC = () => {
   return (
     <Layout>
       <div className="">
