@@ -1,21 +1,43 @@
 import clsx from 'clsx'
 import { Layout } from '../../Layout'
 import { useForm } from 'react-hook-form'
+import { trpc } from '../../../infra/trpc'
+import { useLocation, useParams } from 'wouter'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 export const PeopleEdit: React.FC = () => {
+  const personId = useParams().personId as string
+  const res = trpc.personById.useQuery({ personId })
+  const [, navigate] = useLocation()
+
+  const updatePerson = trpc.updatePerson.useMutation({
+    onSuccess() {
+      toast.success('The people is updated')
+      navigate('/people')
+    },
+  })
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
   } = useForm({
     defaultValues: {
       nickname: '',
     },
   })
 
-  const onSubmit = handleSubmit(async (input) => {
-    console.log(input)
-  })
+  useEffect(() => {
+    if (res.data) {
+      setValue('nickname', res.data.nickname)
+    }
+  }, [res, setValue])
+
+  const onSubmit = handleSubmit(async (person) =>
+    updatePerson.mutate({ personId, person }),
+  )
 
   return (
     <Layout>

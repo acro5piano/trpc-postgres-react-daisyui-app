@@ -14,7 +14,7 @@ function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <Switch>
-          <Route path="/people/:peopleId/edit" component={PeopleEdit} />
+          <Route path="/people/:personId/edit" component={PeopleEdit} />
           <Route path="/people/new" component={PeopleNew} />
           <Route path="/people" component={PeopleList} />
 

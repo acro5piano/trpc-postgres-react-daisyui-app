@@ -34,7 +34,7 @@ export const PeopleList: React.FC = () => {
                   <td>
                     <a
                       className="da-btn da-btn-xs"
-                      href={`/people/${person.id}`}
+                      href={`/people/${person.id}/edit`}
                     >
                       Edit
                     </a>

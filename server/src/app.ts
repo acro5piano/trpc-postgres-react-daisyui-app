@@ -9,6 +9,15 @@ const appRouter = router({
   personList: publicProcedure.query(async () => {
     return db.selectFrom('person').selectAll().execute()
   }),
+  personById: publicProcedure
+    .input(z.object({ personId: z.string() }))
+    .query(async ({ input }) => {
+      return db
+        .selectFrom('person')
+        .selectAll()
+        .where('id', '=', input.personId)
+        .executeTakeFirstOrThrow()
+    }),
   createPerson: publicProcedure
     .input(z.object({ nickname: z.string().min(0).default('unnamed') }))
     .mutation(async ({ input }) => {
@@ -21,6 +30,23 @@ const appRouter = router({
       return db
         .insertInto('person')
         .values(input)
+        .returningAll()
+        .executeTakeFirstOrThrow()
+    }),
+  updatePerson: publicProcedure
+    .input(
+      z.object({
+        personId: z.string(),
+        person: z.object({
+          nickname: z.string().min(0).default('unnamed'),
+        }),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      return db
+        .updateTable('person')
+        .set(input.person)
+        .where('id', '=', input.personId)
         .returningAll()
         .executeTakeFirstOrThrow()
     }),
