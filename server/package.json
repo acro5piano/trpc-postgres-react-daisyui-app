@@ -7,7 +7,9 @@
   "dependencies": {
     "@trpc/client": "11.0.0-rc.490",
     "@trpc/server": "11.0.0-rc.490",
+    "@types/cors": "^2.8.17",
     "better-sqlite3": "^11.1.2",
+    "cors": "^2.8.5",
     "esbuild": "^0.23.0",
     "esbuild-register": "^3.6.0",
     "fastify": "^4.28.1",

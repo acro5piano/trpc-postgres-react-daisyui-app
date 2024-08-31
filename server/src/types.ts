@@ -9,7 +9,7 @@ export type PersonId = string & { __brand?: 'Person' }
 export interface PersonTable {
   id: Generated<PersonId>
   nickname: string
-  /** @default other */
+  /** @default OTHER */
   gender: Generated<'MAN' | 'WOMAN' | 'OTHER'>
   created_at: ColumnType<Date, string | undefined, never>
 }
