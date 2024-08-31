@@ -17,7 +17,7 @@ function App() {
           <Route path="/people/:personId/edit" component={PeopleEdit} />
           <Route path="/people/new" component={PeopleNew} />
           <Route path="/people" component={PeopleList} />
-
+          <Route path="/" component={PeopleList} />
           <Route>404: No such page!</Route>
         </Switch>
       </QueryClientProvider>

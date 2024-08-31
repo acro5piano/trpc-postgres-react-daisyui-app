@@ -32,12 +32,12 @@ export const PeopleList: React.FC = () => {
                   <td>{person.nickname}</td>
                   <td>{person.gender}</td>
                   <td>
-                    <a
+                    <Link
                       className="da-btn da-btn-xs"
                       href={`/people/${person.id}/edit`}
                     >
                       Edit
-                    </a>
+                    </Link>
                   </td>
                 </tr>
               ))}
