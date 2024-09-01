@@ -1,9 +1,13 @@
 import 'dotenv/config'
 
-import { ColumnType, Kysely, PostgresDialect } from 'kysely'
-import type Database from './__generated__/kanel/Database'
+import { Kysely, PostgresDialect } from 'kysely'
 import { Pool } from 'pg'
-import { GenderEnumType } from './models'
+import { PersonTable, PetTable } from './models'
+
+type Database = {
+  person: PersonTable
+  pet: PetTable
+}
 
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
@@ -12,14 +16,3 @@ export const db = new Kysely<Database>({
     }),
   }),
 })
-
-declare module './__generated__/kanel/public/Person.ts' {
-  export default interface PersonTable {
-    hoge: string
-    gender: ColumnType<
-      GenderEnumType,
-      GenderEnumType | undefined,
-      GenderEnumType
-    >
-  }
-}

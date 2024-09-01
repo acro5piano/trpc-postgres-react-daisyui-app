@@ -1,5 +1,4 @@
-import type { PersonId } from './__generated__/kanel/public/Person'
-import type { GenderEnumType } from './models'
+import type { PersonId, GenderEnumType, PetId } from './models'
 import { db } from './db'
 
 export async function updatePersonGenderService(
@@ -15,7 +14,13 @@ export async function updatePersonGenderService(
     throw new Error('Gender is not changed!')
   }
 
+  person.gender
+
   // @ts-expect-error
   person.gender === '__INVALID__'
   // TODO
 }
+
+declare const a: PetId
+// @ts-expect-error
+updatePersonGenderService(a, 'MALE')
