@@ -1,23 +1,20 @@
 import { createHTTPServer } from '@trpc/server/adapters/standalone'
 import { publicProcedure, router } from './trpc'
-import { db } from './db'
 import { z } from 'zod'
 import cors from 'cors'
 import { TRPCError } from '@trpc/server'
 import { PersonInputSchema } from './models'
+import { db, person } from './db'
+import { eq } from 'drizzle-orm'
 
 const appRouter = router({
   personList: publicProcedure.query(async () => {
-    return db.selectFrom('person').selectAll().execute()
+    return db.select().from(person)
   }),
   personById: publicProcedure
     .input(z.object({ personId: z.string() }))
     .query(async ({ input }) => {
-      return db
-        .selectFrom('person')
-        .selectAll()
-        .where('id', '=', input.personId)
-        .executeTakeFirstOrThrow()
+      return db.select().from(person).where(eq(person.id, input.personId))
     }),
   createPerson: publicProcedure
     .input(PersonInputSchema)
@@ -28,11 +25,7 @@ const appRouter = router({
           code: 'UNPROCESSABLE_CONTENT',
         })
       }
-      return db
-        .insertInto('person')
-        .values(input)
-        .returningAll()
-        .executeTakeFirstOrThrow()
+      return db.insert(person).values(input).returning()
     }),
   updatePerson: publicProcedure
     .input(
