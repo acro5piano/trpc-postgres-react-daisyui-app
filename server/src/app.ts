@@ -42,6 +42,13 @@ const appRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
+      const a = await db
+        .updateTable('person')
+        .set(input.person)
+        .where('id', '=', input.personId)
+        .returningAll()
+        .executeTakeFirstOrThrow()
+      a.id
       return db
         .updateTable('person')
         .set(input.person)

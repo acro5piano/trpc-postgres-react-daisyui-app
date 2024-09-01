@@ -1,26 +1,11 @@
-import type { Database } from './types' // this is the Database interface we defined earlier
-import SQLite from 'better-sqlite3'
-import { Kysely, sql, SqliteDialect } from 'kysely'
-
-const dialect = new SqliteDialect({
-  database: new SQLite('./local.db'),
-})
+import { Kysely, PostgresDialect } from 'kysely'
+import type Database from './__generated__/kanel/Database'
+import { Pool } from 'pg'
 
 export const db = new Kysely<Database>({
-  dialect,
+  dialect: new PostgresDialect({
+    pool: new Pool({
+      connectionString: process.env.DATABASE_URL,
+    }),
+  }),
 })
-
-export async function migrateUp() {
-  await db.schema
-    .createTable('person')
-    .ifNotExists()
-    .addColumn('id', 'uuid', (col) =>
-      col.notNull().defaultTo(sql`(lower(hex(randomblob(8))))`),
-    )
-    .addColumn('nickname', 'varchar', (col) => col.notNull().defaultTo(''))
-    .addColumn('gender', 'varchar', (col) => col.notNull().defaultTo('OTHER'))
-    .addColumn('createdAt', 'varchar', (col) =>
-      col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
-    )
-    .execute()
-}
