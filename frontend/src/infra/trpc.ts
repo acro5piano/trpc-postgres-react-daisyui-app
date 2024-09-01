@@ -1,12 +1,7 @@
-import {
-  createTRPCReact,
-  httpBatchLink,
-  TRPCClientError,
-  TRPCLink,
-} from '@trpc/react-query'
+import { createTRPCReact, httpBatchLink, TRPCLink } from '@trpc/react-query'
 import { observable } from '@trpc/server/observable'
 
-import type { AppRouter } from '../../../server/src/app'
+import type { AppRouter } from '@server/app'
 import { useState } from 'react'
 import { QueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
@@ -49,7 +44,8 @@ export const errorToastLink: TRPCLink<AppRouter> = () => {
           try {
             const errors: Error[] = JSON.parse(err.message)
             toast.error(
-              errors.map((e: any) => `${e.path}: ${e.message}`).join(', '),
+              // @ts-expect-error: path is not defind in trpc
+              errors.map((e) => `${e.path}: ${e.message}`).join(', '),
             )
           } catch {
             toast.error(err.message)

@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { MakeId, MakeTable } from '../util/kysely-util'
-import { brandedUuid } from '../util/zod-util'
+import { MakeId, MakeTable } from '@server/util/kysely-util'
+import { brandedUuid } from '@server/util/zod-util'
 
 export const GenderEnum = z.enum(['MALE', 'FEMALE', 'OTHER'])
 export type GenderEnumType = z.infer<typeof GenderEnum>

@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { MakeId, MakeTableWithRequiredKeys } from '../util/kysely-util'
+import { MakeId, MakeTableWithRequiredKeys } from '@server/util/kysely-util'
 import { PersonId } from './Person'
-import { brandedUuid } from '../util/zod-util'
+import { brandedUuid } from '@server/util/zod-util'
 
 export const PetKindEnum = z.enum(['DOG', 'CAT'])
 export type PetKindEnumType = z.infer<typeof PetKindEnum>

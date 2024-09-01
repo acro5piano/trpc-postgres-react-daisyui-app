@@ -1,6 +1,6 @@
 import { Link } from 'wouter'
-import { trpc } from '../../../infra/trpc'
-import { Layout } from '../../Layout'
+import { trpc } from '@frontend/infra/trpc'
+import { Layout } from '@frontend/components/Layout'
 
 export const PeopleList: React.FC = () => {
   const peopleQuery = trpc.person.personList.useQuery()

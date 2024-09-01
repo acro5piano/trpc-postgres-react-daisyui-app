@@ -1,8 +1,8 @@
-import { Layout } from '../../Layout'
-import { trpc } from '../../../infra/trpc'
+import { Layout } from '@frontend/components/Layout'
+import { trpc } from '@frontend/infra/trpc'
 import { useLocation } from 'wouter'
 import toast from 'react-hot-toast'
-import { PersonForm } from '../../forms/PersonForm'
+import { PersonForm } from '@frontend/components/forms/PersonForm'
 
 export const PeopleNew: React.FC = () => {
   const [, navigate] = useLocation()

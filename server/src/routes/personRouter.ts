@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { db } from '../db'
-import { PersonInputSchema } from '../models/Person'
-import { publicProcedure, router } from '../trpc'
+import { db } from '@server/db'
+import { PersonInputSchema } from '@server/models/Person'
+import { publicProcedure, router } from '@server/trpc'
 import { TRPCError } from '@trpc/server'
 
 export const personRouter = router({
