@@ -4,7 +4,7 @@ import { db } from './db'
 import { z } from 'zod'
 import cors from 'cors'
 import { TRPCError } from '@trpc/server'
-import { PersonInputSchema } from './models'
+import { PersonInputSchema } from './models/Person'
 
 const appRouter = router({
   personList: publicProcedure.query(async () => {

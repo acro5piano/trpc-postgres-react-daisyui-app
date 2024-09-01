@@ -1,4 +1,5 @@
-import type { PersonId, GenderEnumType, PetId } from './models'
+import type { PersonId, GenderEnumType } from './models/Person'
+import type { PetId } from './models/Pet'
 import { db } from './db'
 
 export async function updatePersonGenderService(

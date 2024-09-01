@@ -2,7 +2,8 @@ import 'dotenv/config'
 
 import { Kysely, PostgresDialect } from 'kysely'
 import { Pool } from 'pg'
-import { PersonTable, PetTable } from './models'
+import { PersonTable } from './models/Person'
+import { PetTable } from './models/Pet'
 
 type Database = {
   person: PersonTable
