@@ -2,7 +2,7 @@
   "name": "fastify-daisyui-serverside-app",
   "module": "src/app.ts",
   "scripts": {
-    "dev": "nodemon --ext ts,tsx --exec 'node -r esbuild-register src/app.ts'",
+    "dev": "nodemon --ext ts,tsx --exec 'node -r ./src/register.js src/app.ts'",
     "migrate": "kysely-migration-cli"
   },
   "dependencies": {

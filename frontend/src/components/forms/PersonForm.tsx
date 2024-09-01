@@ -32,7 +32,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({
     <form onSubmit={onSubmitForm}>
       <div className="flex justify-end">
         <button className="da-btn da-btn-primary">
-          {isSubmitting ? 'Updating...' : 'Update'}
+          {isSubmitting ? 'Saving...' : 'Save'}
         </button>
       </div>
       <label className="da-form-control w-full max-w-xs">
