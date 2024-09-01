@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { MakeId, MakeTable } from '../util/kysely-util'
+import { customUuid } from '../util/zod-util'
 
 export const GenderEnum = z.enum(['MALE', 'FEMALE', 'OTHER'])
 export type GenderEnumType = z.infer<typeof GenderEnum>
@@ -7,7 +8,7 @@ export type GenderEnumType = z.infer<typeof GenderEnum>
 export type PersonId = MakeId<'Person'>
 
 export const PersonSchema = z.object({
-  id: z.custom<PersonId>(),
+  id: customUuid<PersonId>(),
   nickname: z.string().min(3, 'Nickname length should be 3 or more.'),
   gender: GenderEnum,
   createdAt: z.string().date(),

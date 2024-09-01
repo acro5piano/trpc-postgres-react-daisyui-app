@@ -1,7 +1,7 @@
 import type { PersonId, GenderEnumType } from './models/Person'
-import type { PetId } from './models/Pet'
 import { db } from './db'
 
+// To check strict typecheck is working!
 export async function updatePersonGenderService(
   personId: PersonId,
   newGender: GenderEnumType,
@@ -15,13 +15,26 @@ export async function updatePersonGenderService(
     throw new Error('Gender is not changed!')
   }
 
+  const pet = await db
+    .selectFrom('pet')
+    .selectAll()
+    .where('personId', '=', person.id)
+    .executeTakeFirst()
+  if (pet) {
+    await db
+      .selectFrom('pet')
+      .selectAll()
+      // @ts-expect-error
+      .where('personId', '=', pet.id)
+      .executeTakeFirst()
+    // @ts-expect-error
+    updatePersonGenderService(pet.id, 'MALE')
+    updatePersonGenderService(pet.personId, 'MALE')
+  }
+
   person.gender
 
   // @ts-expect-error
   person.gender === '__INVALID__'
   // TODO
 }
-
-declare const a: PetId
-// @ts-expect-error
-updatePersonGenderService(a, 'MALE')

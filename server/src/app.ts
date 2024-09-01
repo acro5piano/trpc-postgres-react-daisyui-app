@@ -11,7 +11,7 @@ const appRouter = router({
     return db.selectFrom('person').selectAll().execute()
   }),
   personById: publicProcedure
-    .input(z.object({ personId: z.string() }))
+    .input(z.object({ personId: z.string().uuid() }))
     .query(async ({ input }) => {
       return db
         .selectFrom('person')
@@ -37,7 +37,7 @@ const appRouter = router({
   updatePerson: publicProcedure
     .input(
       z.object({
-        personId: z.string(),
+        personId: z.string().uuid(),
         person: PersonInputSchema,
       }),
     )
