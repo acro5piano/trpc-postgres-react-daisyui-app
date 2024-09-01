@@ -19,7 +19,7 @@ export const useTrpcClient = () => {
       links: [
         errorToastLink,
         httpBatchLink({
-          url: 'http://localhost:3000/',
+          url: 'http://127.0.0.1:3000/',
           // You can pass any HTTP headers you wish here
           async headers() {
             return {
