@@ -1,4 +1,9 @@
-import { createTRPCReact, httpBatchLink, TRPCLink } from '@trpc/react-query'
+import {
+  createTRPCReact,
+  httpBatchLink,
+  TRPCClientError,
+  TRPCLink,
+} from '@trpc/react-query'
 import { observable } from '@trpc/server/observable'
 
 import type { AppRouter } from '../../../server/src/app'
@@ -41,7 +46,14 @@ export const errorToastLink: TRPCLink<AppRouter> = () => {
           observer.next(value)
         },
         error(err) {
-          toast.error(err.message)
+          try {
+            const errors: Error[] = JSON.parse(err.message)
+            toast.error(
+              errors.map((e: any) => `${e.path}: ${e.message}`).join(', '),
+            )
+          } catch {
+            toast.error(err.message)
+          }
           observer.error(err)
         },
         complete() {

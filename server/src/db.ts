@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import { Kysely, PostgresDialect } from 'kysely'
 import type Database from './__generated__/kanel/Database'
 import { Pool } from 'pg'

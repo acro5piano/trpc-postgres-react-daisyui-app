@@ -29,15 +29,5 @@ No GraphQL.
 # Getting Started
 
 ```
-docker-compose up -d
-
-cd ./frontend
-pnpm install
-cd ..
-
-cd ./server
-pnpm install
-cd ..
-
 make dev
 ```

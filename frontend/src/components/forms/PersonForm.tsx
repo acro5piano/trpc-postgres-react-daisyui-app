@@ -50,6 +50,21 @@ export const PersonForm: React.FC<PersonFormProps> = ({
           {errors.nickname?.message}
         </span>
       </label>
+      <label className="da-form-control w-full max-w-xs">
+        <span className="da-label-text">Gender</span>
+        <input
+          type="text"
+          placeholder="Type here"
+          className={clsx(
+            'da-input da-input-bordered w-full max-w-xs',
+            errors.gender && 'da-input-error',
+          )}
+          {...register('gender')}
+        />
+        <span className="da-label-text-alt text-red-600">
+          {errors.gender?.message}
+        </span>
+      </label>
     </form>
   )
 }

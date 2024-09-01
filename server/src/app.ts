@@ -22,7 +22,7 @@ const appRouter = router({
   createPerson: publicProcedure
     .input(PersonInputSchema)
     .mutation(async ({ input }) => {
-      if (input.nickname === 'a') {
+      if (input.nickname === 'fuck') {
         throw new TRPCError({
           message: 'Invalid nickname!',
           code: 'UNPROCESSABLE_CONTENT',
@@ -42,13 +42,6 @@ const appRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      const a = await db
-        .updateTable('person')
-        .set(input.person)
-        .where('id', '=', input.personId)
-        .returningAll()
-        .executeTakeFirstOrThrow()
-      a.id
       return db
         .updateTable('person')
         .set(input.person)
