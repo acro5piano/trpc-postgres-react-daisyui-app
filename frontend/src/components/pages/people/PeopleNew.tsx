@@ -6,7 +6,7 @@ import { PersonForm } from '../../forms/PersonForm'
 
 export const PeopleNew: React.FC = () => {
   const [, navigate] = useLocation()
-  const createPerson = trpc.createPerson.useMutation({
+  const createPerson = trpc.person.createPerson.useMutation({
     onSuccess() {
       toast.success('A person has been created')
       navigate('/people')

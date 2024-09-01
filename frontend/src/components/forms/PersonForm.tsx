@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import {
   PersonInputSchema,
   PersonInputType,
-} from '../../../../server/src/models'
+} from '../../../../server/src/models/Person'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 

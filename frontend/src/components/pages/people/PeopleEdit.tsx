@@ -6,10 +6,10 @@ import { PersonForm } from '../../forms/PersonForm'
 
 export const PeopleEdit: React.FC = () => {
   const personId = useParams().personId as string
-  const { data } = trpc.personById.useQuery({ personId })
+  const { data } = trpc.person.personById.useQuery({ personId })
   const [, navigate] = useLocation()
 
-  const updatePerson = trpc.updatePerson.useMutation({
+  const updatePerson = trpc.person.updatePerson.useMutation({
     onSuccess() {
       toast.success('The people is updated')
       navigate('/people')

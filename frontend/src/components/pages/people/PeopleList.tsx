@@ -3,7 +3,7 @@ import { trpc } from '../../../infra/trpc'
 import { Layout } from '../../Layout'
 
 export const PeopleList: React.FC = () => {
-  const peopleQuery = trpc.personList.useQuery()
+  const peopleQuery = trpc.person.personList.useQuery()
 
   return (
     <Layout>
