@@ -4,6 +4,7 @@ import { db } from './db'
 import { z } from 'zod'
 import cors from 'cors'
 import { TRPCError } from '@trpc/server'
+import { PersonSchema } from './models'
 
 const appRouter = router({
   personList: publicProcedure.query(async () => {
@@ -19,11 +20,11 @@ const appRouter = router({
         .executeTakeFirstOrThrow()
     }),
   createPerson: publicProcedure
-    .input(z.object({ nickname: z.string().min(0).default('unnamed') }))
+    .input(PersonSchema)
     .mutation(async ({ input }) => {
       if (input.nickname === 'a') {
         throw new TRPCError({
-          message: 'not A hotel!',
+          message: 'Invalid nickname!',
           code: 'UNPROCESSABLE_CONTENT',
         })
       }
@@ -37,9 +38,7 @@ const appRouter = router({
     .input(
       z.object({
         personId: z.string(),
-        person: z.object({
-          nickname: z.string().min(0).default('unnamed'),
-        }),
+        person: PersonSchema,
       }),
     )
     .mutation(async ({ input }) => {
